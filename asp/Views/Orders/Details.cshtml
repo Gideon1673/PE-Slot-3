@@ -1,0 +1,84 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Question_2.Models
+@model List<OrderDetail>
+@{
+	Order order = ViewBag.Order;
+}
+
+<h1>Details</h1>
+<dl class="row">
+	<h4>Orders</h4>
+	<dt class="col-sm-2">
+		OrderDate
+	</dt>
+	<dd class="col-sm-10">
+		@order.OrderDate
+	</dd>
+	<dt class="col-sm-2">
+		RequiredDate
+	</dt>
+	<dd class="col-sm-10">
+		@order.RequiredDate
+	</dd>
+	<dt class="col-sm-2">
+		ShippedDate
+	</dt>
+	<dd class="col-sm-10">
+		@order.ShippedDate
+	</dd>
+	<dt class="col-sm-2">
+		Freight
+	</dt>
+	<dd class="col-sm-10">
+		@order.Freight.Value.ToString("F2")
+	</dd>
+	<dt class="col-sm-2">
+		Member
+	</dt>
+	<dd class="col-sm-10">
+		@order.Employee.Name
+	</dd>
+</dl>
+
+<dl class="row">
+	<h4>List of Products</h4>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					ProductId
+				</th>
+				<th>
+					ProductName
+				</th>
+				<th>
+					Category
+				</th>
+				<th>
+					Quantity
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@item.ProductId
+					</td>
+					<td>
+						@item.Product.ProductName
+					</td>
+					<td>
+						@item.Product.Category.CategoryName
+					</td>
+					<td>
+						@item.Quantity
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</dl>

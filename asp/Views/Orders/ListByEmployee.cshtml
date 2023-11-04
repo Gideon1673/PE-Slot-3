@@ -1,0 +1,73 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Question_2.Models
+@using System.Globalization
+@{
+    List<Employee> employees = ViewData["employees"] as List<Employee>;
+    List<Order> orders = ViewData["orders"] as List<Order>;
+}
+
+<div class="row" >
+    <div class="col-md-4">
+        <h1>Employees</h1>
+        @foreach(Employee e in employees) {
+            <a asp-route-id="@e.EmployeeId">@(e.FirstName + " " + e.LastName)</a><br />
+        }
+    </div>
+    
+    <div class="col-md-8">
+        <h1>Orders</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        OrderDate
+                    </th>
+                    <th>
+                        RequiredDate
+                    </th>
+                    <th>
+                        ShippedDate
+                    </th>
+                    <th>
+                        Freight
+                    </th>
+                    <th>
+                        Employee
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in orders)
+                {
+                    <tr>
+                        <td>
+                            @item.OrderDate
+                        </td>
+                        <td>
+                            @item.RequiredDate
+                        </td>
+                        <td>
+                            @item.ShippedDate
+                        </td>
+                        <td>
+                            @item.Freight.Value.ToString("F2")
+                        </td>
+                        <td>
+                            @item.Employee.Name
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.OrderId">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
